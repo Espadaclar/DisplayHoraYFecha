@@ -112,8 +112,17 @@ public class DisplayHoraYFecha
         if(anno2 >= 0 && anno2 < 100){
             anno.setValue(anno2);
         }
-        
         updateDisplay();
+    }
+    
+    /**
+     * getMomento que cuando se invoca devuelve una cadena de caracteres de 14 caracteres del tipo 18:47 07/02/14
+     */
+    public String getMomento(){
+        String devuelveFecha = "";
+        return devuelveFecha = hours.getDisplayValue() + ":" + 
+                        minutes.getDisplayValue() + "  " + dia.getDisplayValue()
+                        + "/" + mes.getDisplayValue() + "/" + anno.getDisplayValue();
     }
 }
 
