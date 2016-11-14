@@ -9,8 +9,11 @@ public class DisplayHoraYFecha
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
+    private NumberDisplay dia;
+    private NumberDisplay mes;
+    private NumberDisplay anno;
     private String displayString;    // simulates the actual display
-    
+
     /**
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
@@ -19,19 +22,11 @@ public class DisplayHoraYFecha
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
+        dia = new NumberDisplay(30);
+        mes = new NumberDisplay(12);
+        anno = new NumberDisplay(99);
+        inicializaHora();
         updateDisplay();
-    }
-
-    /**
-     * Constructor for ClockDisplay objects. This constructor
-     * creates a new clock set at the time specified by the 
-     * parameters.
-     */
-    public DisplayHoraYFecha(int hour, int minute)
-    {
-        hours = new NumberDisplay(24);
-        minutes = new NumberDisplay(60);
-        setTime(hour, minute);
     }
 
     /**
@@ -51,10 +46,13 @@ public class DisplayHoraYFecha
      * Set the time of the display to the specified hour and
      * minute.
      */
-    public void setTime(int hour, int minute)
+    public void inicializaHora()
     {
-        hours.setValue(hour);
-        minutes.setValue(minute);
+        hours.setValue(0);
+        minutes.setValue(0);
+        dia.setValue(1);
+        mes.setValue(1);
+        anno.setValue(01);
         updateDisplay();
     }
 
@@ -65,15 +63,15 @@ public class DisplayHoraYFecha
     {
         return displayString;
     }
-    
+
     /**
      * Update the internal string that represents the display.
      */
     private void updateDisplay()
     {
-          displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+        displayString = hours.getDisplayValue() + ":" + 
+        minutes.getDisplayValue() + ":" + dia.getDisplayValue() + ":" + mes.getDisplayValue() + ":" +
+        anno.getDisplayValue() ;
     }          
 }
-
 
