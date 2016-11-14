@@ -22,9 +22,9 @@ public class DisplayHoraYFecha
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
-        dia = new NumberDisplay(30);
-        mes = new NumberDisplay(12);
-        anno = new NumberDisplay(99);
+        dia = new NumberDisplay(31);
+        mes = new NumberDisplay(13);
+        anno = new NumberDisplay(100);
         inicializaHora();
         updateDisplay();
     }
@@ -92,6 +92,27 @@ public class DisplayHoraYFecha
         if(mes.getValue() == 0) {  // it just rolled over!
             anno.increment();
         }
+        updateDisplay();
+    }
+    
+    /**
+     * setMomento que debe permitir fijar un momento temporal completo. En este caso sí hemos de comprobar que 
+     * los parámetros tienen valores legales; en caso de que algún parámetro no tenga un valor legal, no se modifica 
+     * nada del estado del objeto.
+     */
+    public void setMomento(int hour, int minute, int dia2, int mes2, int anno2){
+        hours.setValue(hour);
+        minutes.setValue(minute);
+        if(dia2 > 1 && dia2 >= 30){
+            dia.setValue(dia2);
+        }
+        if(mes2 > 1 && mes2 <= 12){
+            mes.setValue(mes2);
+        }
+        if(anno2 >= 0 && anno2 < 100){
+            anno.setValue(anno2);
+        }
+        
         updateDisplay();
     }
 }
