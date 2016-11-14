@@ -1,11 +1,17 @@
-
 /**
- * Write a description of class DisplayHoraYFecha here.
+ * The ClockDisplay class implements a digital clock display for a
+ * European-style 24 hour clock. The clock shows hours and minutes. The 
+ * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
+ * midnight).
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The clock display receives "ticks" (via the timeTick method) every minute
+ * and reacts by incrementing the display. This is done in the usual clock
+ * fashion: the hour increments when the minutes roll over to zero.
+ * 
+ * @author Michael Kölling and David J. Barnes
+ * @version 2011.07.31
  */
-public class DisplayHoraYFecha
+public class ClockDisplay
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
@@ -15,7 +21,7 @@ public class DisplayHoraYFecha
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
      */
-    public DisplayHoraYFecha()
+    public ClockDisplay()
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
@@ -27,7 +33,7 @@ public class DisplayHoraYFecha
      * creates a new clock set at the time specified by the 
      * parameters.
      */
-    public DisplayHoraYFecha(int hour, int minute)
+    public ClockDisplay(int hour, int minute)
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
@@ -71,9 +77,7 @@ public class DisplayHoraYFecha
      */
     private void updateDisplay()
     {
-          displayString = hours.getDisplayValue() + ":" + 
+        displayString = hours.getDisplayValue() + ":" + 
                         minutes.getDisplayValue();
-    }          
+    }
 }
-
-
