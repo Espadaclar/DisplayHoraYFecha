@@ -72,6 +72,45 @@ public class DisplayHoraYFecha
         displayString = hours.getDisplayValue() + ":" + 
         minutes.getDisplayValue() + ":" + dia.getDisplayValue() + ":" + mes.getDisplayValue() + ":" +
         anno.getDisplayValue() ;
-    }          
+    }  
+    
+    /**
+     * avanzarMomento que permita avanzar un minuto el momento temporal. Hemos de tener en cuenta que los meses 
+     * tienen todos 30 días.
+     */
+    public void avanzarMomento(){
+         minutes.increment();
+        if(minutes.getValue() == 0) {  // it just rolled over!
+            hours.increment();
+        }
+        if(hours.getValue() == 0) {  // it just rolled over!
+            dia.increment();
+        }
+        if(dia.getValue() == 0) {  // it just rolled over!
+            mes.increment();
+        }
+        if(mes.getValue() == 0) {  // it just rolled over!
+            anno.increment();
+        }
+        updateDisplay();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
