@@ -7,140 +7,85 @@
  */
 public class DisplayHoraYFecha
 {
-    private NumberDisplay hours;
-    private NumberDisplay minutes;
+    // instance variables - replace the example below with your own
+    private NumberDisplay hora;
+    private NumberDisplay minuto;
     private NumberDisplay dia;
     private NumberDisplay mes;
     private NumberDisplay anno;
-    private String displayString;    // simulates the actual display
+    private String horaYFecha;
 
     /**
-     * Constructor for ClockDisplay objects. This constructor 
-     * creates a new clock set at 00:00.
+     * Constructor for objects of class DisplayHoraYFecha
      */
     public DisplayHoraYFecha()
     {
-        hours = new NumberDisplay(24);
-        minutes = new NumberDisplay(60);
-        dia = new NumberDisplay(31);
-        mes = new NumberDisplay(13);
-        anno = new NumberDisplay(100);
-        inicializaHora();
-        updateDisplay();
+        
+        hora = new  NumberDisplay(24);
+        minuto = new  NumberDisplay(60);
+        dia = new  NumberDisplay(31);
+        mes = new  NumberDisplay(13);
+        anno = new  NumberDisplay(100);
+        dia1Mes1Anno1();
+        iniciaHoraFecha();
     }
 
     /**
-     * This method should get called once every minute - it makes
-     * the clock display go one minute forward.
+     * mt para asignar un valor inicial a dia, mes y año en el constructor.
      */
-    public void timeTick()
-    {
-        minutes.increment();
-        if(minutes.getValue() == 0) {  // it just rolled over!
-            hours.increment();
-        }
-        updateDisplay();
-    }
-
-    /**
-     * Set the time of the display to the specified hour and
-     * minute.
-     */
-    public void inicializaHora()
-    {
-        hours.setValue(0);
-        minutes.setValue(0);
+    private void dia1Mes1Anno1(){
         dia.setValue(1);
         mes.setValue(1);
-        anno.setValue(01);
-        updateDisplay();
+        anno.setValue(1);
     }
 
     /**
-     * Return the current time of this display in the format HH:MM.
+     *mt para inicializar hora y fecha en el constructor 
      */
-    public String getTime()
+    private void iniciaHoraFecha()
     {
-        return displayString;
+        horaYFecha =  hora.getDisplayValue()+ ":" +minuto.getDisplayValue()+ "  " +dia.getDisplayValue()+ "/" +
+        mes.getDisplayValue()+ "/" +anno.getDisplayValue();
     }
 
     /**
-     * Update the internal string that represents the display.
-     */
-    private void updateDisplay()
-    {
-        displayString = hours.getDisplayValue() + ":" + 
-        minutes.getDisplayValue() + ":" + dia.getDisplayValue() + ":" + mes.getDisplayValue() + ":" +
-        anno.getDisplayValue() ;
-    }  
-    
-    /**
-     * avanzarMomento que permita avanzar un minuto el momento temporal. Hemos de tener en cuenta que los meses 
-     * tienen todos 30 días.
+     * mt que permite avanzar un minuto el momento temporal.
      */
     public void avanzarMomento(){
-         minutes.increment();
-        if(minutes.getValue() == 0) {  // it just rolled over!
-            hours.increment();
+        minuto.increment();
+        if(minuto.getValue() == 0){
+            hora.increment();
+            if(hora.getValue() == 0){
+                dia.increment();
+                if(dia.getValue() == 0){
+                    mes.increment();
+                    if(mes.getValue() == 0){
+                        anno.increment();
+                    }
+                }
+            }
         }
-        if(hours.getValue() == 0) {  // it just rolled over!
-            dia.increment();
-        }
-        if(dia.getValue() == 0) {  // it just rolled over!
-            mes.increment();
-        }
-        if(mes.getValue() == 0) {  // it just rolled over!
-            anno.increment();
-        }
-        updateDisplay();
+        dia1Mes1Anno1();   // paso este mt para que cuando llegue 0, dia, mes y anno tomen valor 1 en getMomento();
+        iniciaHoraFecha();// paso el incremento al mét iniciaHoraFecha() 
     }
-    
+
     /**
-     * setMomento que debe permitir fijar un momento temporal completo. En este caso sí hemos de comprobar que 
-     * los parámetros tienen valores legales; en caso de que algún parámetro no tenga un valor legal, no se modifica 
-     * nada del estado del objeto.
+     * mt que permite fijar un momento temporal completo
      */
-    public void setMomento(int hour, int minute, int dia2, int mes2, int anno2){
-        hours.setValue(hour);
-        minutes.setValue(minute);
-        if(dia2 > 1 && dia2 >= 30){
-            dia.setValue(dia2);
-        }
-        if(mes2 > 1 && mes2 <= 12){
-            mes.setValue(mes2);
-        }
-        if(anno2 >= 0 && anno2 < 100){
-            anno.setValue(anno2);
-        }
-        updateDisplay();
+    public void setMomento(int hora2, int minuto2, int dia2, int mes2, int anno2){
+
+        hora.setValue(hora2);
+        minuto.setValue(minuto2);
+        dia.setValue(dia2);
+        mes.setValue(mes2);
+        anno.setValue(anno2);
+        iniciaHoraFecha(); // paso el valor que doy a los atributos al método iniciaHoraFecha()
     }
     
     /**
-     * getMomento que cuando se invoca devuelve una cadena de caracteres de 14 caracteres del tipo 18:47 07/02/14
+     * mt que cuando se invoca devuelve una cadena de caracteres de 14 caracteres
      */
     public String getMomento(){
-        String devuelveFecha = "";
-        return devuelveFecha = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue() + "  " + dia.getDisplayValue()
-                        + "/" + mes.getDisplayValue() + "/" + anno.getDisplayValue();
+        return horaYFecha;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
