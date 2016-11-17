@@ -19,6 +19,18 @@ public class DisplayHoraYFecha
         horaYFecha = horaYFecha2;//true devuelve hora y fecha;  false no devuelve nada.
         mostraHora = mostraHora2;    //true devuelve solo la hora, false devuelve solo la fecha.
     }
+    
+    /**
+     * constructor sin parámetros
+     */
+    public DisplayHoraYFecha()
+    {
+        horas = new NumberDisplay(24);
+        minutos = new NumberDisplay(60);
+        dia = new DisplayDosDigitos(31);
+        mes = new DisplayDosDigitos(13);
+        anyo = new DisplayDosDigitos(100); 
+    }
 
     /**
      * Modifiques el código de tal forma que cuando creemos un objeto de la clase DisplayHoraYFecha podamos elegir por medio de dos parametros 
@@ -49,7 +61,10 @@ public class DisplayHoraYFecha
      */
     public String getMomento()
     {
-        String fechaHora = "";
+        String fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
+                     dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
+                    anyo.getValorDelDisplay();
+  
         if(mostraHora == true){
             if(horaYFecha == true){
                 fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
