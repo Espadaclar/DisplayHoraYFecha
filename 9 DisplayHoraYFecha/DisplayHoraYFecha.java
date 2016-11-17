@@ -1,91 +1,91 @@
-
-/**
- * Write a description of class DisplayHoraYFecha here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class DisplayHoraYFecha
+	public class DisplayHoraYFecha
 {
-    // instance variables - replace the example below with your own
-    private NumberDisplay hora;
-    private NumberDisplay minuto;
-    private NumberDisplay dia;
-    private NumberDisplay mes;
-    private NumberDisplay anno;
-    private String horaYFecha;
+	private NumberDisplay horas;
+	private NumberDisplay minutos;
+	private DisplayDosDigitos dia;
+	private DisplayDosDigitos mes;
+	private DisplayDosDigitos anyo;
+	
+	public DisplayHoraYFecha()
+	{
+		horas = new NumberDisplay(24);
+		minutos = new NumberDisplay(60);
+		dia = new DisplayDosDigitos(31);
+		mes = new DisplayDosDigitos(13);
+		anyo = new DisplayDosDigitos(100);
+	}
+	public void avanzarMomento()
+	{
+		minutos.increment();
+		if(minutos.getValue() == 0){
+			horas.increment();
+			if(horas.getValue() == 0){
+				dia.incrementaValor();
+				if(dia.getValor() == 1){
+					mes.incrementaValor();
+					if(mes.getValor() == 1) {
+						anyo.incrementaValor();
+					}					
+				}
+			}
+		}	
+	}
+	
+	public String getMomento()
+	{
+		return horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
+		       dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
+		       anyo.getValorDelDisplay();
+	}
+	
+	public void setMomento(int nuevaHora, int nuevoMinuto, 
+	                       int nuevoDia, int nuevoMes, int nuevoAnyo)
+	{
+		if (nuevaHora >= 0 && nuevaHora < 24 && 
+		    nuevoMinuto >= 0 && nuevoMinuto < 60 && 
+		    nuevoDia > 0 && nuevoDia < 31 &&
+		    nuevoMes > 0 && nuevoMes < 13 && 
+		    nuevoAnyo >= 0 && nuevoAnyo < 100) 
+		{
+			minutos.setValue(nuevoMinuto);
+			horas.setValue(nuevaHora);
+			dia.setValor(nuevoDia);
+			mes.setValor(nuevoMes);
+			anyo.setValor(nuevoAnyo);
 
-    /**
-     * Constructor for objects of class DisplayHoraYFecha
-     */
-    public DisplayHoraYFecha()
-    {
-        
-        hora = new  NumberDisplay(24);
-        minuto = new  NumberDisplay(60);
-        dia = new  NumberDisplay(31);
-        mes = new  NumberDisplay(13);
-        anno = new  NumberDisplay(100);
-        dia1Mes1Anno1();
-        iniciaHoraFecha();
-    }
+		}	
+		
+	}
+	
+	
+	public void setMomentoVersion2(int nuevaHora, int nuevoMinuto, 
+		                         int nuevoDia, int nuevoMes, int nuevoAnyo)
+	{
+		boolean seDebeCambiarElMomentoTemporal = true;
 
-    /**
-     * mt para asignar un valor inicial a dia, mes y año en el constructor.
-     */
-    private void dia1Mes1Anno1(){
-        dia.setValue(1);
-        mes.setValue(1);
-        anno.setValue(1);
-    }
-
-    /**
-     *mt para inicializar hora y fecha en el constructor 
-     */
-    private void iniciaHoraFecha()
-    {
-        horaYFecha =  hora.getDisplayValue()+ ":" +minuto.getDisplayValue()+ "  " +dia.getDisplayValue()+ "/" +
-        mes.getDisplayValue()+ "/" +anno.getDisplayValue();
-    }
-
-    /**
-     * mt que permite avanzar un minuto el momento temporal.
-     */
-    public void avanzarMomento(){
-        minuto.increment();
-        if(minuto.getValue() == 0){
-            hora.increment();
-            if(hora.getValue() == 0){
-                dia.increment();
-                if(dia.getValue() == 0){
-                    mes.increment();
-                    if(mes.getValue() == 0){
-                        anno.increment();
-                    }
-                }
-            }
-        }
-        dia1Mes1Anno1();   // paso este mt para que cuando llegue 0, dia, mes y anno tomen valor 1 en getMomento();
-        iniciaHoraFecha();// paso el incremento al mét iniciaHoraFecha() 
-    }
-
-    /**
-     * mt que permite fijar un momento temporal completo
-     */
-    public void setMomento(int hora2, int minuto2, int dia2, int mes2, int anno2){
-
-        hora.setValue(hora2);
-        minuto.setValue(minuto2);
-        dia.setValue(dia2);
-        mes.setValue(mes2);
-        anno.setValue(anno2);
-        iniciaHoraFecha(); // paso el valor que doy a los atributos al método iniciaHoraFecha()
-    }
+		if (nuevaHora < 0 || nuevaHora > 23) {
+		  seDebeCambiarElMomentoTemporal = false;
+		}
+		if (nuevoMinuto < 0 || nuevoMinuto > 59) {
+		  seDebeCambiarElMomentoTemporal = false;
+		}
+		if (nuevoDia < 1 || nuevoDia > 30) {
+		  seDebeCambiarElMomentoTemporal = false;
+		}
+		if (nuevoMes < 1 || nuevoMes > 12) {
+		  seDebeCambiarElMomentoTemporal = false;
+		}
+		if (nuevoAnyo < 1 || nuevoAnyo > 99) {
+		  seDebeCambiarElMomentoTemporal = false;
+		}
+		if (seDebeCambiarElMomentoTemporal == true){
+		  minutos.setValue(nuevoMinuto);
+		  horas.setValue(nuevaHora);
+		  dia.setValor(nuevoDia);
+		  mes.setValor(nuevoMes);
+		  anyo.setValor(nuevoAnyo);
+		}
     
-    /**
-     * mt que cuando se invoca devuelve una cadena de caracteres de 14 caracteres
-     */
-    public String getMomento(){
-        return horaYFecha;
-    }
+  	}
+	
 }
