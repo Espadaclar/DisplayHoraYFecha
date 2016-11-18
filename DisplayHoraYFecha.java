@@ -54,13 +54,13 @@ public class DisplayHoraYFecha
         if( sinHora == false && sinFecha == true){
             fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue();
         }
-        if(sinHora == false && sinFecha == false){
+        else if(sinHora == false && sinFecha == false){
             fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
                 dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
                 anyo.getValorDelDisplay();
             
         }
-        if(sinHora == true && sinFecha == false){
+        else if(sinHora == true && sinFecha == false){
             fechaHora = dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
                     anyo.getValorDelDisplay();
         }
