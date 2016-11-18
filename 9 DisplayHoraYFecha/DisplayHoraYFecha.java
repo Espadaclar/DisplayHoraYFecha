@@ -6,32 +6,58 @@ public class DisplayHoraYFecha
     private DisplayDosDigitos mes;
     private DisplayDosDigitos anyo;
     //////////////
-    private boolean horaYFecha; //true devuelve hora y fecha;  false no devuelve nada.
-    private boolean mostraHora;   //true muestra la hora, false no muestra nada.
+    private boolean sinHora;   
+    private boolean sinFecha;   
 
-    public DisplayHoraYFecha(boolean mostraHora2, boolean horaYFecha2)
-    {
-        horas = new NumberDisplay(24);
-        minutos = new NumberDisplay(60);
-        dia = new DisplayDosDigitos(31);
-        mes = new DisplayDosDigitos(13);
-        anyo = new DisplayDosDigitos(100); 
-        horaYFecha = horaYFecha2;//true devuelve hora y fecha;  false no devuelve nada.
-        mostraHora = mostraHora2;    //true devuelve solo la hora, false devuelve solo la fecha.
-    }
-    
     /**
-     * constructor sin parámetros
+     * si sinHora == false && sinFecha == false --------------- aparece la hora y la fecha.
+     * si sinHora2 = true && sinFecha = true   --------------- aparece "-------------".
+     * si sinHoar2 = false && sinFecha = true  --------------- solo aparece la hora.
+     * si sinHora2 = true && sinFecha = false ---------------  aparece la fecha.
      */
-    public DisplayHoraYFecha()
+    public DisplayHoraYFecha(boolean sinHora2, boolean sinFecha2)
     {
         horas = new NumberDisplay(24);
         minutos = new NumberDisplay(60);
         dia = new DisplayDosDigitos(31);
         mes = new DisplayDosDigitos(13);
         anyo = new DisplayDosDigitos(100); 
+        sinHora = sinHora2;    
+        sinFecha = sinFecha2;       
+
+       
     }
 
+    /**
+     * si sinHora == false && sinFecha == false --------------- solo aparece la hora y la fecha.
+     * si sinHoar2 = false && sinFecha = true   --------------- aparece la hora.
+     * si soloHoar2 = false && soloFecha = true  --------------- solo aparece la fecha.
+     * si soloHora2 = false && soloFecha = false --------------- aparece "-------------".
+     */
+    public String getMomento()
+    {
+        String fechaHora ="-----------------";
+         
+        if( sinHora == false && sinFecha == true){
+            fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue();
+        }
+        if(sinHora == false && sinFecha == false){
+            fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
+                dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
+                anyo.getValorDelDisplay();
+            
+        }
+        if(sinHora == true && sinFecha == false){
+            fechaHora = dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
+                    anyo.getValorDelDisplay();
+        }
+        return fechaHora;
+        //      return horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
+        //             dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
+        //             anyo.getValorDelDisplay();
+    }
+
+    
     /**
      * Modifiques el código de tal forma que cuando creemos un objeto de la clase DisplayHoraYFecha podamos elegir por medio de dos parametros 
      * booleanos si ese objeto va a devolver la hora y la fecha, solo la hora, solo la fecha o nada cuando invoquemos el método que devuelve 
@@ -55,34 +81,8 @@ public class DisplayHoraYFecha
         }   
     }
 
-    /**
-     * si mostrarHora == true muestra hora si no no hace nada.
-     * si horaYFecha == true muestra hora y fecha, si falso muestra solo la hora
-     */
-    public String getMomento()
-    {
-        String fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
-                     dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
-                    anyo.getValorDelDisplay();
-  
-        if(mostraHora == true){
-            if(horaYFecha == true){
-                fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
-                dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
-                anyo.getValorDelDisplay();
-            }
-            else{
-                fechaHora = fechaHora = horas.getDisplayValue() + ":" + minutos.getDisplayValue();
-            }
-        }
-        return fechaHora;
-        //      return horas.getDisplayValue() + ":" + minutos.getDisplayValue() + " " +
-        //             dia.getValorDelDisplay() + "/" + mes.getValorDelDisplay() + "/" +
-        //             anyo.getValorDelDisplay();
-    }
-
-    public void setMomento(int nuevaHora, int nuevoMinuto, 
-    int nuevoDia, int nuevoMes, int nuevoAnyo)
+    
+      public void setMomento(int nuevaHora, int nuevoMinuto, int nuevoDia, int nuevoMes, int nuevoAnyo)
     {
         if (nuevaHora >= 0 && nuevaHora < 24 && 
         nuevoMinuto >= 0 && nuevoMinuto < 60 && 
