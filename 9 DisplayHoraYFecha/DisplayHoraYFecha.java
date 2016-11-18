@@ -27,7 +27,20 @@ public class DisplayHoraYFecha
 
        
     }
-
+    
+    
+    /**
+     * constructor sin parámetros
+     */
+    public DisplayHoraYFecha()
+    {
+        horas = new NumberDisplay(24);
+        minutos = new NumberDisplay(60);
+        dia = new DisplayDosDigitos(31);
+        mes = new DisplayDosDigitos(13);
+        anyo = new DisplayDosDigitos(100); 
+    }
+    
     /**
      * si sinHora == false && sinFecha == false --------------- solo aparece la hora y la fecha.
      * si sinHoar2 = false && sinFecha = true   --------------- aparece la hora.
